@@ -1,0 +1,138 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Responsive Blog Layout</title>
+
+    <style>
+      /* Reset */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background-color: #f4f6f9;
+        line-height: 1.6;
+      }
+
+      /* Header */
+      header {
+        background-color: #222;
+        color: white;
+        padding: 1.5rem;
+        text-align: center;
+        letter-spacing: 1px;
+      }
+
+      /* Main container */
+      .blog-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        padding: 2rem;
+      }
+
+      /* Blog Card */
+      .blog-card {
+        background-color: white;
+        flex: 1 1 30%; /* Flexible width */
+        padding: 1.5rem;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        transition: 0.3s;
+      }
+
+      .blog-card h3 {
+        margin-bottom: 0.8rem;
+        font-size: 1.3rem;
+        color: #222;
+      }
+
+      .blog-card p {
+        font-size: 0.95rem;
+        color: #555;
+        margin-bottom: 1rem;
+      }
+
+      .read-btn {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        transition: 0.3s;
+      }
+
+      .read-btn:hover {
+        background-color: #0056b3;
+      }
+
+      .blog-card:hover {
+        transform: translateY(-5px);
+      }
+
+      /* Tablet */
+      @media (max-width: 900px) {
+        .blog-card {
+          flex: 1 1 45%;
+        }
+      }
+
+      /* Mobile */
+      @media (max-width: 600px) {
+        .blog-container {
+          flex-direction: column;
+        }
+
+        .blog-card {
+          flex: 1 1 100%;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>My Blog</h1>
+    </header>
+
+    <main class="blog-container">
+      <div class="blog-card">
+        <h3>Understanding HTML Basics</h3>
+        <p>
+          Learn the foundation of web development with essential HTML concepts
+          and structure.
+        </p>
+        <a href="#" class="read-btn">Read More</a>
+      </div>
+
+      <div class="blog-card">
+        <h3>Mastering CSS Styling</h3>
+        <p>
+          Explore how to style beautiful websites using colors, typography, and
+          layout techniques.
+        </p>
+        <a href="#" class="read-btn">Read More</a>
+      </div>
+
+      <div class="blog-card">
+        <h3>Getting Started with JavaScript</h3>
+        <p>Discover how JavaScript makes websites interactive and dynamic.</p>
+        <a href="#" class="read-btn">Read More</a>
+      </div>
+
+      <div class="blog-card">
+        <h3>Responsive Web Design</h3>
+        <p>
+          Build websites that look perfect on desktop, tablet, and mobile
+          screens.
+        </p>
+        <a href="#" class="read-btn">Read More</a>
+      </div>
+    </main>
+  </body>
+</html>
