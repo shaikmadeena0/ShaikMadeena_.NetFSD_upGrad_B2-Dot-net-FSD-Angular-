@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Theme Toggle App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .light {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        .dark {
+            background-color: #1e1e1e;
+            color: #ffffff;
+        }
+
+        button {
+            margin-top: 50px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Theme Toggle Application</h2>
+    <button id="toggleBtn">Switch to Dark Mode</button>
+
+    <script>
+        const body = document.body;
+        const toggleBtn = document.getElementById("toggleBtn");
+        function loadTheme() {
+            const savedTheme = localStorage.getItem("theme");
+
+            if (savedTheme) {
+                body.classList.add(savedTheme);
+                updateButtonText(savedTheme);
+            } else {
+                body.classList.add("light");
+            }
+        }
+        function toggleTheme() {
+            if (body.classList.contains("light")) {
+                body.classList.remove("light");
+                body.classList.add("dark");
+                localStorage.setItem("theme", "dark");
+                updateButtonText("dark");
+            } else {
+                body.classList.remove("dark");
+                body.classList.add("light");
+                localStorage.setItem("theme", "light");
+                updateButtonText("light");
+            }
+        }
+        function updateButtonText(theme) {
+            if (theme === "dark") {
+                toggleBtn.textContent = "Switch to Light Mode";
+            } else {
+                toggleBtn.textContent = "Switch to Dark Mode";
+            }
+        }
+        toggleBtn.addEventListener("click", toggleTheme);
+        loadTheme();
+    </script>
+
+</body>
+</html>
