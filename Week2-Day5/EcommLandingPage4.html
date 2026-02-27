@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ElectroMart - E-Commerce</title>
+
+    <!-- Bootstrap 5 CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Custom Theme -->
+    <style>
+      :root {
+        --bs-primary: #5a0fc8;
+        --bs-primary-rgb: 90, 15, 200;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ================= NAVBAR WITH OFFCANVAS ================= -->
+    <nav class="navbar navbar-dark bg-primary fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand fw-bold" href="#">ElectroMart</a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasNavbar"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div
+          class="offcanvas offcanvas-end text-bg-primary"
+          tabindex="-1"
+          id="offcanvasNavbar"
+        >
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title">Menu</h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="offcanvas"
+            ></button>
+          </div>
+
+          <div class="offcanvas-body">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Products</a>
+              </li>
+              <li class="nav-item"><a class="nav-link" href="#">Deals</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Spacer -->
+    <div class="mt-5 pt-4"></div>
+
+    <!-- ================= HERO SECTION ================= -->
+    <section class="bg-light py-5">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-6 text-center text-md-start">
+            <h1 class="display-4 fw-bold">Big Electronics Sale</h1>
+            <p class="lead">Up to 50% discount on premium gadgets.</p>
+            <button class="btn btn-primary btn-lg me-2">Shop Now</button>
+            <button class="btn btn-outline-primary btn-lg">
+              Explore Deals
+            </button>
+          </div>
+
+          <div class="col-md-6 mt-4 mt-md-0">
+            <div class="bg-primary text-white text-center p-5 rounded shadow">
+              <h3>🔥 Limited Time Offer</h3>
+              <p>Grab your favorite products before stock ends!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CAROUSEL ================= -->
+    <section class="py-5 bg-white">
+      <div class="container">
+        <h2 class="text-center mb-4 fw-bold">Featured Products</h2>
+
+        <div
+          id="productCarousel"
+          class="carousel slide"
+          data-bs-ride="carousel"
+        >
+          <div class="carousel-inner text-center">
+            <div class="carousel-item active">
+              <div class="bg-primary text-white p-5 rounded">
+                <h3>Premium Laptop</h3>
+                <p>High performance for professionals</p>
+                <button class="btn btn-light">Buy Now</button>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="bg-dark text-white p-5 rounded">
+                <h3>Smartphone Pro</h3>
+                <p>Next-gen speed and camera</p>
+                <button class="btn btn-light">Buy Now</button>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="bg-secondary text-white p-5 rounded">
+                <h3>Wireless Headphones</h3>
+                <p>Immersive sound experience</p>
+                <button class="btn btn-light">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#productCarousel"
+            data-bs-slide="prev"
+          >
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+
+          <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#productCarousel"
+            data-bs-slide="next"
+          >
+            <span class="carousel-control-next-icon"></span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PRODUCT GRID ================= -->
+    <section class="py-5 bg-light">
+      <div class="container">
+        <h2 class="text-center mb-5 fw-bold">Latest Products</h2>
+
+        <div class="row g-4">
+          <div class="col-12 col-sm-6 col-lg-3">
+            <div class="card h-100 shadow-sm text-center p-4">
+              <h5>Tablet</h5>
+              <p class="text-primary fw-bold">$299</p>
+              <button class="btn btn-primary w-100">Buy Now</button>
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-6 col-lg-3">
+            <div class="card h-100 shadow-sm text-center p-4">
+              <h5>Camera</h5>
+              <p class="text-primary fw-bold">$499</p>
+              <button class="btn btn-primary w-100">Buy Now</button>
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-6 col-lg-3">
+            <div class="card h-100 shadow-sm text-center p-4">
+              <h5>Smart Watch</h5>
+              <p class="text-primary fw-bold">$199</p>
+              <button class="btn btn-primary w-100">Buy Now</button>
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-6 col-lg-3">
+            <div class="card h-100 shadow-sm text-center p-4">
+              <h5>Gaming Console</h5>
+              <p class="text-primary fw-bold">$599</p>
+              <button class="btn btn-primary w-100">Buy Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= NEWSLETTER ================= -->
+    <section class="py-5 bg-primary text-white">
+      <div class="container text-center">
+        <h3 class="fw-bold">Subscribe to Our Newsletter</h3>
+        <p>Get updates on latest products and offers</p>
+
+        <form class="row justify-content-center mt-3">
+          <div class="col-md-6 col-lg-4">
+            <input
+              type="email"
+              class="form-control"
+              placeholder="Enter your email"
+              required
+            />
+          </div>
+          <div class="col-auto mt-2 mt-md-0">
+            <button class="btn btn-dark">Subscribe</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="bg-dark text-white text-center py-3">
+      © 2026 ElectroMart. All Rights Reserved.
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
