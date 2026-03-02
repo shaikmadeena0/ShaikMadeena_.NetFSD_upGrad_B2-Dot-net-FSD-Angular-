@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FAQ Toggle Section</title>
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 600px;
+            margin: 50px auto;
+        }
+
+        .faq-item {
+            background: white;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px gray;
+        }
+
+        .question {
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .answer {
+            display: none;
+            margin-top: 10px;
+            color: #333;
+        }
+
+        .active {
+            color: #28a745;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+        <div class="question">1. What courses do you offer?</div>
+        <div class="answer">We offer Web Development, Java, Python, and Data Science courses.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="question">2. What is the course duration?</div>
+        <div class="answer">Course duration ranges from 3 to 6 months depending on the program.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="question">3. Do you provide certificates?</div>
+        <div class="answer">Yes, we provide certificates after successful course completion.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="question">4. Are classes online or offline?</div>
+        <div class="answer">We provide both online and offline classroom training.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="question">5. Is placement assistance available?</div>
+        <div class="answer">Yes, we offer placement assistance and interview preparation support.</div>
+    </div>
+
+</div>
+
+<script>
+$(document).ready(function() {
+
+    $(".question").click(function() {
+
+        // Toggle clicked answer
+        $(this).next(".answer").slideToggle();
+
+        // Highlight selected question
+        $(this).toggleClass("active");
+
+    });
+
+});
+</script>
+
+</body>
+</html>
