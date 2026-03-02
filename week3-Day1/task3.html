@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Product Cart Counter</title>
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f4f4;
+      }
+
+      .header {
+        background: #333;
+        color: white;
+        padding: 15px;
+        text-align: center;
+        font-size: 20px;
+      }
+
+      .cart-count {
+        background: red;
+        padding: 5px 10px;
+        border-radius: 50%;
+      }
+
+      .container {
+        width: 800px;
+        margin: 30px auto;
+      }
+
+      .product {
+        background: white;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+        box-shadow: 0px 0px 5px gray;
+      }
+
+      button {
+        padding: 8px 12px;
+        background: #28a745;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+
+      button:disabled {
+        background: gray;
+        cursor: not-allowed;
+      }
+
+      .message {
+        margin-left: 10px;
+        color: green;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="header">
+      🛒 Cart Items: <span id="cartCounter" class="cart-count">0</span>
+    </div>
+
+    <div class="container">
+      <div class="product">
+        <h3>Product 1 - Laptop</h3>
+        <button class="addBtn">Add to Cart</button>
+        <span class="message"></span>
+      </div>
+
+      <div class="product">
+        <h3>Product 2 - Mobile</h3>
+        <button class="addBtn">Add to Cart</button>
+        <span class="message"></span>
+      </div>
+
+      <div class="product">
+        <h3>Product 3 - Headphones</h3>
+        <button class="addBtn">Add to Cart</button>
+        <span class="message"></span>
+      </div>
+
+      <div class="product">
+        <h3>Product 4 - Smart Watch</h3>
+        <button class="addBtn">Add to Cart</button>
+        <span class="message"></span>
+      </div>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        let count = 0;
+
+        // Event Delegation
+        $(".container").on("click", ".addBtn", function () {
+          count++;
+
+          // Update counter using .text()
+          $("#cartCounter").text(count);
+
+          // Disable button using .prop()
+          $(this).prop("disabled", true);
+
+          // Change button text using .text()
+          $(this).text("Added");
+
+          // Add attribute using .attr()
+          $(this).attr("data-added", "true");
+
+          // Show confirmation message
+          $(this).siblings(".message").text("✔ Added to cart");
+        });
+      });
+    </script>
+  </body>
+</html>
