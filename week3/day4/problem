@@ -1,0 +1,79 @@
+-- Create Database
+CREATE DATABASE EComm;
+GO
+
+-- Use Database
+USE EComm;
+GO
+
+-- Create Categories Table
+CREATE TABLE Categories (
+    category_id INT IDENTITY(1,1) PRIMARY KEY,
+    category_name VARCHAR(100) NOT NULL
+);
+
+-- Create Products Table
+CREATE TABLE Products (
+    product_id INT IDENTITY(1,1) PRIMARY KEY,
+    product_name VARCHAR(100) NOT NULL,
+    category_id INT NOT NULL,
+    model_year INT NOT NULL,
+    list_price DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (category_id) REFERENCES Categories(category_id)
+);
+
+-- Insert Data into Categories
+INSERT INTO Categories (category_name)
+VALUES
+('Mountain Bikes'),
+('Road Bikes'),
+('Electric Bikes');
+
+-- Insert Data into Products
+INSERT INTO Products (product_name, category_id, model_year, list_price)
+VALUES
+('Mountain Bike A', 1, 2017, 900),
+('Mountain Bike B', 1, 2018, 1200),
+('Mountain Bike C', 1, 2019, 800),
+
+('Road Bike A', 2, 2017, 1500),
+('Road Bike B', 2, 2018, 1800),
+('Road Bike C', 2, 2019, 1400),
+
+('Electric Bike A', 3, 2019, 2000),
+('Electric Bike B', 3, 2020, 2500),
+('Electric Bike C', 3, 2021, 2200);
+
+
+SELECT * FROM Categories;
+SELECT * FROM  Products;
+
+
+SELECT product_name, model_year, list_price
+FROM Products p1
+WHERE list_price >
+(
+    SELECT AVG(list_price)
+    FROM Products p2
+    WHERE p2.category_id = p1.category_id
+);
+
+
+SELECT 
+    product_name,
+    category_id,
+    list_price,
+    (list_price - 
+        (SELECT AVG(list_price) 
+         FROM Products p2 
+         WHERE p2.category_id = p1.category_id)
+    ) AS price_difference
+FROM Products p1;
+
+
+
+
+
+SELECT 
+product_name + ' (' + CAST(model_year AS VARCHAR) + ')' AS Product_Details
+FROM Products;
