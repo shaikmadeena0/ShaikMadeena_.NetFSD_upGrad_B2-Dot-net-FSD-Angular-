@@ -1,0 +1,64 @@
+use CompanyDB;
+
+
+CREATE VIEW vw_ProductDetails
+AS
+SELECT 
+    p.product_name,
+    b.brand_name,
+    c.ca_name AS category_name,
+    p.model_year,
+    p.list_price
+FROM products p
+JOIN brands b 
+    ON p.brand_id = b.brand_id
+JOIN categories c 
+    ON p.category_id = c.ca_id;
+
+
+    SELECT * FROM vw_ProductDetails;
+
+
+
+CREATE TABLE staffs(
+    staff_id INT IDENTITY(1,1) PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    email VARCHAR(100)
+);
+
+
+CREATE TABLE orders(
+    order_id INT IDENTITY(1,1) PRIMARY KEY,
+    customer_id INT,
+    store_id INT,
+    staff_id INT,
+    order_date DATE,
+    order_status INT,
+
+    FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
+    FOREIGN KEY (store_id) REFERENCES stores(store_id),
+    FOREIGN KEY (staff_id) REFERENCES staffs(staff_id)
+);
+
+
+
+CREATE VIEW vw_OrderSummary
+AS
+SELECT 
+    o.order_id,
+    c.first_name + ' ' + c.last_name AS customer_name,
+    s.store_name,
+    st.first_name + ' ' + st.last_name AS staff_name,
+    o.order_date,
+    o.order_status
+FROM orders o
+JOIN customers c
+    ON o.customer_id = c.customer_id
+JOIN stores s
+    ON o.store_id = s.store_id
+JOIN staffs st
+    ON o.staff_id = st.staff_id;
+
+
+    SELECT * FROM vw_OrderSummary;
