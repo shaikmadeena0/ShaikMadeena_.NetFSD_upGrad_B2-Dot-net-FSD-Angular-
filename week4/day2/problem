@@ -1,0 +1,79 @@
+use StoreDb;
+
+CREATE TABLE Products
+(
+    ProductID INT PRIMARY KEY,
+    ProductName VARCHAR(50),
+    StockQty INT
+);
+
+CREATE TABLE Orders
+(
+    OrderID INT PRIMARY KEY,
+    OrderDate DATETIME
+);
+
+CREATE TABLE Order_Items
+(
+    OrderItemID INT PRIMARY KEY,
+    OrderID INT,
+    ProductID INT,
+    Quantity INT,
+    FOREIGN KEY (OrderID) REFERENCES Orders(OrderID),
+    FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
+);
+
+
+----Trigger to Reduce Stock Automatically
+
+CREATE TRIGGER trg_UpdateStock
+ON Order_Items
+AFTER INSERT
+AS
+BEGIN
+
+    IF EXISTS (
+        SELECT 1
+        FROM Products p
+        JOIN inserted i
+        ON p.ProductID = i.ProductID
+        WHERE p.StockQty < i.Quantity
+    )
+    BEGIN
+        RAISERROR ('Insufficient stock',16,1);
+        ROLLBACK TRANSACTION;
+        RETURN;
+    END
+
+    UPDATE p
+    SET p.StockQty = p.StockQty - i.Quantity
+    FROM Products p
+    JOIN inserted i
+    ON p.ProductID = i.ProductID;
+
+END
+
+
+----BEGIN TRANSACTION;
+
+BEGIN TRY
+
+    INSERT INTO Orders(OrderID, OrderDate)
+    VALUES (1, GETDATE());
+
+    INSERT INTO Order_Items(OrderItemID, OrderID, ProductID, Quantity)
+    VALUES (1,1,101,2);
+
+    COMMIT TRANSACTION;
+
+END TRY
+
+BEGIN CATCH
+
+    ROLLBACK TRANSACTION;
+
+    SELECT ERROR_MESSAGE() AS ErrorMessage;
+
+END CATCH
+
+
