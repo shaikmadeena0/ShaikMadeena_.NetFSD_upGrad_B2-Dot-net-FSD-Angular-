@@ -1,0 +1,67 @@
+use StoreDb;
+
+
+CREATE TABLE Products
+(
+    ProductID INT PRIMARY KEY,
+    ProductName VARCHAR(50),
+    StockQty INT
+);
+
+CREATE TABLE Orders
+(
+    OrderID INT PRIMARY KEY,
+    OrderStatus INT
+);
+
+CREATE TABLE Order_Items
+(
+    OrderItemID INT PRIMARY KEY,
+    OrderID INT,
+    ProductID INT,
+    Quantity INT
+);
+
+-----Transaction for Order Cancellation with SAVEPOINT
+
+
+BEGIN TRANSACTION;
+
+BEGIN TRY
+
+    -- SAVEPOINT before restoring stock
+    SAVE TRANSACTION RestoreStockPoint;
+
+    -- Restore stock quantities
+    UPDATE p
+    SET p.StockQty = p.StockQty + oi.Quantity
+    FROM Products p
+    JOIN Order_Items oi
+    ON p.ProductID = oi.ProductID
+    WHERE oi.OrderID = 1;
+
+    -- Update order status to Rejected (3)
+    UPDATE Orders
+    SET OrderStatus = 3
+    WHERE OrderID = 1;
+
+    -- Commit if everything successful
+    COMMIT TRANSACTION;
+
+END TRY
+
+BEGIN CATCH
+
+    -- Rollback only to SAVEPOINT if stock restoration fails
+    IF @@TRANCOUNT > 0
+        ROLLBACK TRANSACTION RestoreStockPoint;
+
+    SELECT ERROR_MESSAGE() AS ErrorMessage;
+
+    -- Final rollback
+    ROLLBACK TRANSACTION;
+
+END CATCH
+
+
+
