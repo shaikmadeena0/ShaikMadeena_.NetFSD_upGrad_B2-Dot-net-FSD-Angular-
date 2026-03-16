@@ -1,0 +1,57 @@
+using System;
+
+class StudentResultAnalyzer
+{
+    // Method to calculate Total and Average using out parameters
+    public static void CalculateResult(int m1, int m2, int m3, out int totalMarks, out double averageMarks)
+    {
+        totalMarks = m1 + m2 + m3;
+        averageMarks = totalMarks / 3.0;
+    }
+
+    static void Main()
+    {
+        Console.Write("Enter number of students: ");
+        int n = Convert.ToInt32(Console.ReadLine());
+
+        for (int i = 1; i <= n; i++)
+        {
+            Console.WriteLine("\nStudent " + i);
+
+            int m1, m2, m3;
+
+            // Input validation for subject 1
+            do
+            {
+                Console.Write("Enter marks for Subject 1 (0-100): ");
+                m1 = Convert.ToInt32(Console.ReadLine());
+            } while (m1 < 0 || m1 > 100);
+
+            // Input validation for subject 2
+            do
+            {
+                Console.Write("Enter marks for Subject 2 (0-100): ");
+                m2 = Convert.ToInt32(Console.ReadLine());
+            } while (m2 < 0 || m2 > 100);
+
+            // Input validation for subject 3
+            do
+            {
+                Console.Write("Enter marks for Subject 3 (0-100): ");
+                m3 = Convert.ToInt32(Console.ReadLine());
+            } while (m3 < 0 || m3 > 100);
+
+            int total;
+            double average;
+
+            // Calling method with out parameters
+            CalculateResult(m1, m2, m3, out total, out average);
+
+            string result = average >= 40 ? "Pass" : "Fail";
+
+            Console.WriteLine("Total Marks = " + total);
+            Console.WriteLine("Average Marks = " + average);
+            Console.WriteLine("Result = " + result);
+        }
+    }
+}
