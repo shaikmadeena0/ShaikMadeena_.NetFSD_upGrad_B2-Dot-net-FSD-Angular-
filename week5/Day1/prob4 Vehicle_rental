@@ -1,0 +1,72 @@
+using System;
+
+class Vehicle
+{
+    private double rentalRatePerDay;
+
+    public string Brand { get; set; }
+
+    public double RentalRatePerDay
+    {
+        get { return rentalRatePerDay; }
+        set
+        {
+            if (value >= 0)
+                rentalRatePerDay = value;
+            else
+                Console.WriteLine("Rental rate cannot be negative.");
+        }
+    }
+
+    public virtual double CalculateRental(int days)
+    {
+        return RentalRatePerDay * days;
+    }
+}
+
+class Car : Vehicle
+{
+    public override double CalculateRental(int days)
+    {
+        if (days <= 0)
+        {
+            Console.WriteLine("Invalid rental days.");
+            return 0;
+        }
+
+        double total = (RentalRatePerDay * days) + 500; // insurance charge
+        return total;
+    }
+}
+
+class Bike : Vehicle
+{
+    public override double CalculateRental(int days)
+    {
+        if (days <= 0)
+        {
+            Console.WriteLine("Invalid rental days.");
+            return 0;
+        }
+
+        double total = RentalRatePerDay * days;
+        double discount = total * 0.05; // 5% discount
+        return total - discount;
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Vehicle vehicle = new Car();
+        vehicle.Brand = "Toyota";
+        vehicle.RentalRatePerDay = 2000;
+
+        int days = 3;
+
+        double totalRental = vehicle.CalculateRental(days);
+
+        Console.WriteLine("Total Rental = " + totalRental);
+    }
+}
