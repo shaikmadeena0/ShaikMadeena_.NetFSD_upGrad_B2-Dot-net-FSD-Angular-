@@ -1,0 +1,42 @@
+using System;
+
+class Student
+{
+    public double CalculateAverage(int m1, int m2, int m3)
+    {
+        return (m1 + m2 + m3) / 3.0;
+    }
+
+    public string GetGrade(double average)
+    {
+        if (average >= 90)
+            return "A+";
+        else if (average >= 80)
+            return "A";
+        else if (average >= 70)
+            return "B";
+        else if (average >= 60)
+            return "C";
+        else
+            return "D";
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Student s = new Student();
+
+        Console.Write("Enter three marks: ");
+        int m1 = Convert.ToInt32(Console.ReadLine());
+        int m2 = Convert.ToInt32(Console.ReadLine());
+        int m3 = Convert.ToInt32(Console.ReadLine());
+
+        double avg = s.CalculateAverage(m1, m2, m3);
+        string grade = s.GetGrade(avg);
+
+        Console.WriteLine("Average = " + avg);
+        Console.WriteLine("Grade = " + grade);
+    }
+}
