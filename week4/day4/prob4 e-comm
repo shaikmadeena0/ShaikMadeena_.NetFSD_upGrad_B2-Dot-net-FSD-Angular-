@@ -1,0 +1,43 @@
+using System;
+
+class EcommerceOrder
+{
+    // Method with optional parameters
+    public static double CalculateFinalAmount(
+        double price,
+        int quantity,
+        double discountPercent = 0,
+        double shippingCharge = 50)
+    {
+        double subtotal = price * quantity;
+
+        double discountAmount = subtotal * discountPercent / 100;
+
+        double amountAfterDiscount = subtotal - discountAmount;
+
+        double finalAmount = amountAfterDiscount + shippingCharge;
+
+        Console.WriteLine("Subtotal = " + subtotal);
+        Console.WriteLine("Discount Applied = " + discountAmount);
+        Console.WriteLine("Shipping Charge = " + shippingCharge);
+        Console.WriteLine("Final Amount = " + finalAmount);
+        Console.WriteLine();
+
+        return finalAmount;
+    }
+
+    static void Main()
+    {
+        // Call without optional parameters
+        Console.WriteLine("Order 1:");
+        CalculateFinalAmount(500, 2);
+
+        // Call with discount only
+        Console.WriteLine("Order 2:");
+        CalculateFinalAmount(500, 2, 10);
+
+        // Call with discount and shipping
+        Console.WriteLine("Order 3:");
+        CalculateFinalAmount(500, 2, 10, 100);
+    }
+}
