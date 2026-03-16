@@ -1,0 +1,48 @@
+using System;
+
+namespace SimpleCalculatorApp
+{
+    // Calculator class contains methods for mathematical operations
+    public class Calculator
+    {
+        // Method for Addition
+        public int Add(int a, int b)
+        {
+            int result = a + b;   // adding two numbers
+            return result;        // returning result to the caller
+        }
+
+        // Method for Subtraction
+        public int Subtract(int a, int b)
+        {
+            int result = a - b;   // subtracting second number from first
+            return result;        // returning result
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Creating object of Calculator class
+            Calculator calc = new Calculator();
+
+            // Taking input from user
+            Console.Write("Enter first number: ");
+            int num1 = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Enter second number: ");
+            int num2 = Convert.ToInt32(Console.ReadLine());
+
+            // Calling Add method
+            int additionResult = calc.Add(num1, num2);
+
+            // Calling Subtract method
+            int subtractionResult = calc.Subtract(num1, num2);
+
+            // Displaying results
+            Console.WriteLine("Addition = " + additionResult);
+            Console.WriteLine("Subtraction = " + subtractionResult);
+        }
+    }
+}
