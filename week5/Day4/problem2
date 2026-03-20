@@ -1,0 +1,45 @@
+using System;
+using System.IO;
+
+class Program
+{
+    static void Main()
+    {
+        try
+        {
+            Console.Write("Enter folder path: ");
+            string folderPath = Console.ReadLine();
+
+            // Check if directory exists
+            if (!Directory.Exists(folderPath))
+            {
+                Console.WriteLine("Invalid directory path ❌");
+                return;
+            }
+
+            // Get all files in directory
+            DirectoryInfo dir = new DirectoryInfo(folderPath);
+            FileInfo[] files = dir.GetFiles();
+
+            int fileCount = 0;
+
+            Console.WriteLine("\n--- File Details ---");
+
+            foreach (FileInfo file in files)
+            {
+                Console.WriteLine("File Name   : " + file.Name);
+                Console.WriteLine("File Size   : " + file.Length + " bytes");
+                Console.WriteLine("Created On  : " + file.CreationTime);
+                Console.WriteLine("---------------------------");
+
+                fileCount++;
+            }
+
+            Console.WriteLine("\nTotal Files: " + fileCount);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error: " + ex.Message);
+        }
+    }
+}
