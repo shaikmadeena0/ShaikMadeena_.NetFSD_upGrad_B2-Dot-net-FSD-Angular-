@@ -1,0 +1,50 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+class Program
+{
+    static void Main()
+    {
+        // Step 1: Store marks in an array
+        int[] marks = { 78, 85, 90, 67, 88 };
+
+        // Step 2: Calculate total using Sum() (like reduce)
+        int total = marks.Sum();
+
+        // Step 3: Calculate average
+        double average = marks.Average();
+
+        // Step 4: Find highest score
+        int highest = marks.Max();
+
+        // Step 5: Filter students above threshold
+        int threshold = 80;
+        var aboveThreshold = marks.Where(m => m > threshold).ToArray();
+
+        // Step 6: Count students above threshold
+        int countAbove = aboveThreshold.Length;
+
+        // Step 7: Dictionary (Map) for subject-wise highest marks
+        Dictionary<string, int> subjectMarks = new Dictionary<string, int>()
+        {
+            { "Math", 90 },
+            { "Science", 88 },
+            { "English", 85 }
+        };
+
+        // Step 8: Display results
+        Console.WriteLine("Marks: " + string.Join(", ", marks));
+        Console.WriteLine("Total Marks: " + total);
+        Console.WriteLine("Average Marks: " + average);
+        Console.WriteLine("Highest Score: " + highest);
+        Console.WriteLine("Students above 80: " + countAbove);
+        Console.WriteLine("Marks above 80: " + string.Join(", ", aboveThreshold));
+
+        Console.WriteLine("Subject-wise Highest Marks:");
+        foreach (var subject in subjectMarks)
+        {
+            Console.WriteLine(subject.Key + " : " + subject.Value);
+        }
+    }
+}
