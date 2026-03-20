@@ -1,0 +1,122 @@
+using System;
+using System.Collections.Generic;
+
+// Step 1: Define Record
+public record Student(int RollNo, string Name, string Course, int Marks);
+
+class Program
+{
+    static void Main()
+    {
+        List<Student> students = new List<Student>();
+
+        while (true)
+        {
+            Console.WriteLine("\n===== Student Record Management =====");
+            Console.WriteLine("1. Add Student");
+            Console.WriteLine("2. Display All Students");
+            Console.WriteLine("3. Search by Roll Number");
+            Console.WriteLine("4. Exit");
+            Console.Write("Enter your choice: ");
+
+            int choice;
+            if (!int.TryParse(Console.ReadLine(), out choice))
+            {
+                Console.WriteLine("Invalid input. Enter a number.");
+                continue;
+            }
+
+            switch (choice)
+            {
+                case 1:
+                    AddStudent(students);
+                    break;
+
+                case 2:
+                    DisplayStudents(students);
+                    break;
+
+                case 3:
+                    SearchStudent(students);
+                    break;
+
+                case 4:
+                    return;
+
+                default:
+                    Console.WriteLine("Invalid choice.");
+                    break;
+            }
+        }
+    }
+
+    // Add Student
+    static void AddStudent(List<Student> students)
+    {
+        int rollNo, marks;
+        string name, course;
+
+        Console.Write("Enter Roll Number: ");
+        while (!int.TryParse(Console.ReadLine(), out rollNo))
+        {
+            Console.Write("Invalid Roll Number. Enter again: ");
+        }
+
+        Console.Write("Enter Name: ");
+        name = Console.ReadLine();
+
+        Console.Write("Enter Course: ");
+        course = Console.ReadLine();
+
+        Console.Write("Enter Marks: ");
+        while (!int.TryParse(Console.ReadLine(), out marks) || marks < 0 || marks > 100)
+        {
+            Console.Write("Invalid Marks (0-100). Enter again: ");
+        }
+
+        students.Add(new Student(rollNo, name, course, marks));
+        Console.WriteLine("Student added successfully!");
+    }
+
+    // Display All Students
+    static void DisplayStudents(List<Student> students)
+    {
+        if (students.Count == 0)
+        {
+            Console.WriteLine("No records found.");
+            return;
+        }
+
+        Console.WriteLine("\nStudent Records:");
+        foreach (var s in students)
+        {
+            Console.WriteLine($"Roll No: {s.RollNo} | Name: {s.Name} | Course: {s.Course} | Marks: {s.Marks}");
+        }
+    }
+
+    // Search Student
+    static void SearchStudent(List<Student> students)
+    {
+        Console.Write("Enter Roll Number to search: ");
+        int rollNo;
+
+        if (!int.TryParse(Console.ReadLine(), out rollNo))
+        {
+            Console.WriteLine("Invalid input.");
+            return;
+        }
+
+        var student = students.Find(s => s.RollNo == rollNo);
+
+        Console.WriteLine("\nSearch Result:");
+        if (student != null)
+        {
+            Console.WriteLine("Student Found:");
+            Console.WriteLine($"Roll No: {student.RollNo} | Name: {student.Name} | Course: {student.Course} | Marks: {student.Marks}");
+        }
+        else
+        {
+            Console.WriteLine("Student not found.");
+        }
+    }
+}
