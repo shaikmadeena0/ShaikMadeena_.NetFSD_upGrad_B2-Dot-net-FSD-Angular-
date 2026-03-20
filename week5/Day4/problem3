@@ -1,0 +1,42 @@
+using System;
+using System.IO;
+
+class Program
+{
+    static void Main()
+    {
+        try
+        {
+            Console.Write("Enter root directory path: ");
+            string rootPath = Console.ReadLine();
+
+            // Check if directory exists
+            if (!Directory.Exists(rootPath))
+            {
+                Console.WriteLine("Invalid directory path ❌");
+                return;
+            }
+
+            DirectoryInfo rootDir = new DirectoryInfo(rootPath);
+
+            // Get all subdirectories
+            DirectoryInfo[] subDirs = rootDir.GetDirectories();
+
+            Console.WriteLine("\n--- Directory Details ---");
+
+            foreach (DirectoryInfo dir in subDirs)
+            {
+                // Get files in each directory
+                FileInfo[] files = dir.GetFiles();
+
+                Console.WriteLine("Folder Name : " + dir.Name);
+                Console.WriteLine("File Count  : " + files.Length);
+                Console.WriteLine("---------------------------");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error: " + ex.Message);
+        }
+    }
+}
