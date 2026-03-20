@@ -1,0 +1,47 @@
+using System;
+using System.IO;
+
+class Program
+{
+    static void Main()
+    {
+        try
+        {
+            // 1️⃣ Get all drives
+            DriveInfo[] drives = DriveInfo.GetDrives();
+
+            Console.WriteLine("--- Drive Information ---\n");
+
+            foreach (DriveInfo drive in drives)
+            {
+                // 2️⃣ Check if drive is ready
+                if (drive.IsReady)
+                {
+                    long totalSize = drive.TotalSize;
+                    long freeSpace = drive.AvailableFreeSpace;
+
+                    // Calculate free space percentage
+                    double freePercent = (double)freeSpace / totalSize * 100;
+
+                    Console.WriteLine("Drive Name : " + drive.Name);
+                    Console.WriteLine("Drive Type : " + drive.DriveType);
+                    Console.WriteLine("Total Size : " + totalSize / (1024 * 1024 * 1024) + " GB");
+                    Console.WriteLine("Free Space : " + freeSpace / (1024 * 1024 * 1024) + " GB");
+                    Console.WriteLine("Free %     : " + freePercent.ToString("F2") + "%");
+
+                    // 3️⃣ Warning if below 15%
+                    if (freePercent < 15)
+                    {
+                        Console.WriteLine("⚠️ Warning: Low Disk Space!");
+                    }
+
+                    Console.WriteLine("-------------------------------");
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error: " + ex.Message);
+        }
+    }
+}
