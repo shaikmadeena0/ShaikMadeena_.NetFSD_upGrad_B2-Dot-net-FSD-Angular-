@@ -1,0 +1,52 @@
+using System;
+
+class StackUndo
+{
+    static void Main()
+    {
+        string[] stack = new string[10]; // array stack
+        int top = -1;
+
+        // PUSH operation
+        void Push(string action)
+        {
+            if (top == stack.Length - 1)
+            {
+                Console.WriteLine("Stack Overflow");
+                return;
+            }
+            stack[++top] = action;
+            Display();
+        }
+
+        // POP operation (Undo)
+        void Pop()
+        {
+            if (top == -1)
+            {
+                Console.WriteLine("Stack Underflow (Nothing to undo)");
+                return;
+            }
+            Console.WriteLine("Undo: " + stack[top--]);
+            Display();
+        }
+
+        // Display current state
+        void Display()
+        {
+            Console.Write("Current State: ");
+            for (int i = 0; i <= top; i++)
+            {
+                Console.Write(stack[i] + " ");
+            }
+            Console.WriteLine();
+        }
+
+        // Sample Input
+        Push("Type A");
+        Push("Type B");
+        Push("Type C");
+        Pop(); // Undo
+        Pop(); // Undo
+    }
+}
