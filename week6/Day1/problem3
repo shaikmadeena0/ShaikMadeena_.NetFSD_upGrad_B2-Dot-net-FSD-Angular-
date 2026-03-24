@@ -1,0 +1,42 @@
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        Console.WriteLine("Report generation started...\n");
+
+        // Running tasks concurrently
+        Task salesTask = Task.Run(() => GenerateSalesReport());
+        Task inventoryTask = Task.Run(() => GenerateInventoryReport());
+        Task customerTask = Task.Run(() => GenerateCustomerReport());
+
+        // Wait for all tasks to complete
+        await Task.WhenAll(salesTask, inventoryTask, customerTask);
+
+        Console.WriteLine("\nAll reports generated successfully!");
+    }
+
+    static void GenerateSalesReport()
+    {
+        Console.WriteLine("Sales Report started...");
+        Thread.Sleep(3000); // Simulate work
+        Console.WriteLine("Sales Report completed!");
+    }
+
+    static void GenerateInventoryReport()
+    {
+        Console.WriteLine("Inventory Report started...");
+        Thread.Sleep(2000);
+        Console.WriteLine("Inventory Report completed!");
+    }
+
+    static void GenerateCustomerReport()
+    {
+        Console.WriteLine("Customer Report started...");
+        Thread.Sleep(2500);
+        Console.WriteLine("Customer Report completed!");
+    }
+}
