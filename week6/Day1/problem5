@@ -1,0 +1,57 @@
+using System;
+using System.Diagnostics;
+using System.IO;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Configure Trace Listener (log file)
+        Trace.Listeners.Clear();
+        Trace.Listeners.Add(new TextWriterTraceListener("order_log.txt"));
+        Trace.AutoFlush = true;
+
+        Trace.TraceInformation("Order Processing Started");
+
+        try
+        {
+            ValidateOrder();
+            ProcessPayment();
+            UpdateInventory();
+            GenerateInvoice();
+
+            Trace.TraceInformation("Order Processing Completed Successfully");
+        }
+        catch (Exception ex)
+        {
+            Trace.WriteLine("ERROR: " + ex.Message);
+        }
+
+        Console.WriteLine("Processing done. Check log file (order_log.txt)");
+    }
+
+    static void ValidateOrder()
+    {
+        Trace.WriteLine("Step 1: Validating Order...");
+        // Simulate success
+    }
+
+    static void ProcessPayment()
+    {
+        Trace.WriteLine("Step 2: Processing Payment...");
+        // Simulate success
+    }
+
+    static void UpdateInventory()
+    {
+        Trace.WriteLine("Step 3: Updating Inventory...");
+        
+        // Simulate failure (for debugging)
+        throw new Exception("Inventory update failed!");
+    }
+
+    static void GenerateInvoice()
+    {
+        Trace.WriteLine("Step 4: Generating Invoice...");
+    }
+}
