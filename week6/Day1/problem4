@@ -1,0 +1,45 @@
+using System;
+using System.Threading.Tasks;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        Console.WriteLine("Order Processing Started...\n");
+
+        await ProcessOrderAsync();
+
+        Console.WriteLine("\nOrder Processing Completed!");
+    }
+
+    static async Task ProcessOrderAsync()
+    {
+        await VerifyPaymentAsync();
+        await CheckInventoryAsync();
+        await ConfirmOrderAsync();
+    }
+
+    // Step 1: Payment Verification
+    static async Task VerifyPaymentAsync()
+    {
+        Console.WriteLine("Verifying payment...");
+        await Task.Delay(2000); // simulate delay
+        Console.WriteLine("Payment verified ✅\n");
+    }
+
+    // Step 2: Inventory Check
+    static async Task CheckInventoryAsync()
+    {
+        Console.WriteLine("Checking inventory...");
+        await Task.Delay(1500);
+        Console.WriteLine("Inventory available ✅\n");
+    }
+
+    // Step 3: Order Confirmation
+    static async Task ConfirmOrderAsync()
+    {
+        Console.WriteLine("Confirming order...");
+        await Task.Delay(1000);
+        Console.WriteLine("Order confirmed 🎉\n");
+    }
+}
