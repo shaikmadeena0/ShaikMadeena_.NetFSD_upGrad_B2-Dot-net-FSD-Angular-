@@ -1,0 +1,76 @@
+using System;
+
+namespace SingletonDemo
+{
+    public class ConfigurationManager
+    {
+        // 1. Static instance (single object)
+        private static ConfigurationManager instance;
+
+        // 2. Lock object (for thread safety - optional but good practice)
+        private static readonly object lockObj = new object();
+
+        // 3. Properties
+        public string ApplicationName { get; set; }
+        public string Version { get; set; }
+        public string DatabaseConnectionString { get; set; }
+
+        // 4. Private Constructor (prevents direct object creation)
+        private ConfigurationManager()
+        {
+            // Initialize default values
+            ApplicationName = "Inventory Management System";
+            Version = "1.0.0";
+            DatabaseConnectionString = "Server=localhost;Database=InventoryDB;";
+        }
+
+        // 5. Public Method to get instance
+        public static ConfigurationManager GetInstance()
+        {
+            // Thread-safe Singleton
+            if (instance == null)
+            {
+                lock (lockObj)
+                {
+                    if (instance == null)
+                    {
+                        instance = new ConfigurationManager();
+                    }
+                }
+            }
+            return instance;
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // First Call
+            ConfigurationManager config1 = ConfigurationManager.GetInstance();
+            Console.WriteLine("Config 1:");
+            PrintConfig(config1);
+
+            Console.WriteLine();
+
+            // Second Call
+            ConfigurationManager config2 = ConfigurationManager.GetInstance();
+            Console.WriteLine("Config 2:");
+            PrintConfig(config2);
+
+            Console.WriteLine();
+
+            // Check if both are same instance
+            Console.WriteLine("Same Instance? " + (config1 == config2));
+
+            Console.ReadLine();
+        }
+
+        static void PrintConfig(ConfigurationManager config)
+        {
+            Console.WriteLine("App Name: " + config.ApplicationName);
+            Console.WriteLine("Version: " + config.Version);
+            Console.WriteLine("DB Connection: " + config.DatabaseConnectionString);
+        }
+    }
+}
