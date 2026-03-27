@@ -1,0 +1,95 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace StudentRepositoryPattern
+{
+    // 1. Entity Class
+    public class Student
+    {
+        public int StudentId { get; set; }
+        public string StudentName { get; set; }
+        public string Course { get; set; }
+    }
+
+    // 2. Repository Interface
+    public interface IStudentRepository
+    {
+        void AddStudent(Student student);
+        List<Student> GetAllStudents();
+        Student GetStudentById(int id);
+        void DeleteStudent(int id);
+    }
+
+    // 3. Repository Implementation
+    public class StudentRepository : IStudentRepository
+    {
+        private List<Student> students = new List<Student>();
+
+        public void AddStudent(Student student)
+        {
+            students.Add(student);
+        }
+
+        public List<Student> GetAllStudents()
+        {
+            return students;
+        }
+
+        public Student GetStudentById(int id)
+        {
+            return students.FirstOrDefault(s => s.StudentId == id);
+        }
+
+        public void DeleteStudent(int id)
+        {
+            var student = GetStudentById(id);
+            if (student != null)
+            {
+                students.Remove(student);
+            }
+        }
+    }
+
+    // 4. Main Program (Business Logic)
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            IStudentRepository repo = new StudentRepository();
+
+            // Add Students
+            repo.AddStudent(new Student { StudentId = 1, StudentName = "Rahul", Course = "Java" });
+            repo.AddStudent(new Student { StudentId = 2, StudentName = "Anjali", Course = "Python" });
+            repo.AddStudent(new Student { StudentId = 3, StudentName = "Kiran", Course = "DotNet" });
+
+            // View All Students
+            Console.WriteLine("=== All Students ===");
+            DisplayStudents(repo.GetAllStudents());
+
+            // Find Student by ID
+            Console.WriteLine("\n=== Search Student (ID = 2) ===");
+            var student = repo.GetStudentById(2);
+            if (student != null)
+                Console.WriteLine($"{student.StudentId} - {student.StudentName} - {student.Course}");
+
+            // Delete Student
+            Console.WriteLine("\n=== Deleting Student (ID = 1) ===");
+            repo.DeleteStudent(1);
+
+            // View Again
+            Console.WriteLine("\n=== Students After Deletion ===");
+            DisplayStudents(repo.GetAllStudents());
+
+            Console.ReadLine();
+        }
+
+        static void DisplayStudents(List<Student> students)
+        {
+            foreach (var s in students)
+            {
+                Console.WriteLine($"{s.StudentId} - {s.StudentName} - {s.Course}");
+            }
+        }
+    }
+}
