@@ -1,0 +1,76 @@
+using System;
+using System.Collections.Generic;
+
+namespace StudentReportSRP
+{
+    // 1. Student Class (Data Only)
+    public class Student
+    {
+        public int StudentId { get; set; }
+        public string StudentName { get; set; }
+        public int Marks { get; set; }
+    }
+
+    // 2. StudentRepository (Data Management)
+    public class StudentRepository
+    {
+        private List<Student> students = new List<Student>();
+
+        // Add Student
+        public void AddStudent(Student student)
+        {
+            students.Add(student);
+        }
+
+        // Get All Students
+        public List<Student> GetAllStudents()
+        {
+            return students;
+        }
+    }
+
+    // 3. ReportGenerator (Report Logic Only)
+    public class ReportGenerator
+    {
+        public void GenerateReport(List<Student> students)
+        {
+            Console.WriteLine("===== Student Report =====");
+
+            foreach (var student in students)
+            {
+                Console.WriteLine($"ID: {student.StudentId}");
+                Console.WriteLine($"Name: {student.StudentName}");
+                Console.WriteLine($"Marks: {student.Marks}");
+                Console.WriteLine($"Result: {GetResult(student.Marks)}");
+                Console.WriteLine("-------------------------");
+            }
+        }
+
+        // Private helper method
+        private string GetResult(int marks)
+        {
+            return marks >= 40 ? "Pass" : "Fail";
+        }
+    }
+
+    // 4. Main Program (Execution Flow)
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Create repository
+            StudentRepository repo = new StudentRepository();
+
+            // Add students
+            repo.AddStudent(new Student { StudentId = 1, StudentName = "Rahul", Marks = 75 });
+            repo.AddStudent(new Student { StudentId = 2, StudentName = "Anjali", Marks = 35 });
+            repo.AddStudent(new Student { StudentId = 3, StudentName = "Kiran", Marks = 60 });
+
+            // Generate report
+            ReportGenerator report = new ReportGenerator();
+            report.GenerateReport(repo.GetAllStudents());
+
+            Console.ReadLine();
+        }
+    }
+}
